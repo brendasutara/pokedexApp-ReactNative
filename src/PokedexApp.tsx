@@ -1,11 +1,11 @@
 import '../gesture-handler';
-import { NavigationContainer } from '@react-navigation/native'
+import { ThemeContextProvider } from './presentation/context/ThemeContext';
 import { StackNavigator } from './presentation/navigator/StackNavigator';
 
 export const PokedexApp = () => {
     return (
-        <NavigationContainer>
+        <ThemeContextProvider>
             <StackNavigator />
-        </NavigationContainer>
+        </ThemeContextProvider>
     )
 }
