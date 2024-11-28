@@ -34,10 +34,10 @@ La aplicación permite:
 
 ## Tecnologías y Herramientas
 
--React Native CLI
--TanStack Query
--TypeScript
--Gestión de estado y hooks avanzados
+- React Native CLI
+- TanStack Query
+- TypeScript
+- Gestión de estado y hooks avanzados
 
 ## Contribuciones
 
