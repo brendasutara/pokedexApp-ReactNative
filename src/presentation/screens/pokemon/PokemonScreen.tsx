@@ -90,6 +90,70 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
                 )}
             />
 
+            {/* abilities */}
+            <Text style={styles.subTitle}>Abilities</Text>
+            <FlatList
+                data={pokemon.abilities}
+                horizontal
+                keyExtractor={item => item}
+                showsHorizontalScrollIndicator={false}
+                renderItem={({ item }) => (
+                    <Chip
+                        style={{ marginLeft: 20, backgroundColor: 'transparent', borderWidth: 1 }}
+                        selectedColor="white">{Formatter.capitalize(item)}</Chip>
+                )}
+            />
+
+            {/* Stats */}
+            <Text style={styles.subTitle}>Stats</Text>
+
+            <FlatList
+                data={pokemon.stats}
+                keyExtractor={item => item.name}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                renderItem={({ item }) => (
+                    <View style={styles.statsContainer}>
+                        <Text style={{ flex: 1, color: 'white' }}>
+                            {Formatter.capitalize(item.name)}
+                        </Text>
+                        <Text style={{ color: 'white' }}>{item.value}</Text>
+                    </View>
+                )}
+            />
+
+            {/* Moves */}
+            <Text style={styles.subTitle}>Moves</Text>
+            <FlatList
+                data={pokemon.moves}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                centerContent
+                renderItem={({ item }) => (
+                    <View style={styles.statsContainer}>
+                        <Text style={{ flex: 1, color: 'white' }}>
+                            {Formatter.capitalize(item.name)}
+                        </Text>
+                        <Text style={{ color: 'white' }}>lvl {item.level}</Text>
+                    </View>
+                )}
+            />
+
+            {/* Games */}
+            <Text style={styles.subTitle}>Games</Text>
+            <FlatList
+                data={pokemon.games}
+                horizontal
+                keyExtractor={item => item}
+                showsHorizontalScrollIndicator={false}
+                centerContent
+                renderItem={({ item }) => (
+                    <Chip
+                        style={{ marginLeft: 20, backgroundColor: 'transparent', borderWidth: 1 }}
+                        selectedColor="white">{Formatter.capitalize(item)}</Chip>
+                )}
+            />
+
 
             <View style={{ height: 100 }} />
         </ScrollView>
@@ -134,11 +198,15 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginHorizontal: 20,
         marginTop: 20,
+        marginBottom: 10
     },
     statsContainer: {
         flexDirection: 'column',
-        marginHorizontal: 20,
+        width: 110,
+        marginRight: 10,
         alignItems: 'center',
+        borderRightWidth: 1,
+        borderColor: 'white'
     },
 
 });

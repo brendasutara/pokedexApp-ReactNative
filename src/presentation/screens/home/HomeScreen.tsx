@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
+import { useInfiniteQuery, useQuery, useQueryClient } from '@tanstack/react-query'
 import { FlatList, StyleSheet, View } from 'react-native'
 import { getPokemons } from '../../../actions/pokemons'
 import { PokeballBg } from '../../components/ui/PokeballBg'
@@ -10,6 +10,7 @@ import { PokemonCard } from '../../components/pokemons/PokemonCard'
 export const HomeScreen = () => {
 
     const { top } = useSafeAreaInsets();
+    const queryClient = useQueryClient()
 
     //Esta es la forma tradicional de una petición http
     // const { isLoading, data: pokemons = [] } = useQuery({
@@ -21,9 +22,15 @@ export const HomeScreen = () => {
     const { isLoading, data, fetchNextPage } = useInfiniteQuery({
         queryKey: ['pokemons', 'infinite'],
         initialPageParam: 0,
-        queryFn: (params) => getPokemons(params.pageParam),
-        getNextPageParam: (lastPage, pages) => pages.length,
         staleTime: 1000 * 60 * 60,
+        queryFn: async (params) => {
+            const pokemons = await getPokemons(params.pageParam);
+            pokemons.forEach(pokemon => {
+                queryClient.setQueryData(['pokemon', pokemon.id], pokemon)
+            })
+            return pokemons
+        },
+        getNextPageParam: (lastPage, pages) => pages.length,
     })
 
     console.log(data)
@@ -37,7 +44,7 @@ export const HomeScreen = () => {
                 keyExtractor={(pokemon, index) => `${pokemon.id}-${index}`}
                 numColumns={2}
                 style={{ paddingTop: top * 20 }}
-                ListHeaderComponent={() => <Text variant='displayMedium'>Pokedex</Text>}
+                ListHeaderComponent={() => <Text variant='displayMedium' style={{ marginVertical: 20, marginLeft: 5 }}>Pokedex</Text>}
                 renderItem={({ item }) => <PokemonCard pokemon={item} />}
                 onEndReachedThreshold={0.6}
                 onEndReached={() => fetchNextPage()}
