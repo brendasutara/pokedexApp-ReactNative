@@ -10,7 +10,7 @@ interface Props {
 
 export const PokemonCard = ({ pokemon }: Props) => {
     return (
-        <Card style={[globalTheme.cardContainer, { backgroundColor: '#4C8A69' }]}>
+        <Card style={[globalTheme.cardContainer, { backgroundColor: pokemon.color }]}>
             <Text style={globalTheme.name} variant='bodyLarge' lineBreakMode='middle'>
                 {pokemon.name}
                 {'\n#' + pokemon.id}
