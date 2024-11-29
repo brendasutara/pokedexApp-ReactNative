@@ -52,4 +52,10 @@ export const globalTheme = StyleSheet.create({
         opacity: 0.5,
     },
     // fin card
+
+    FAB: {
+        position: 'absolute',
+        bottom: 20,
+        right: 20
+    }
 })

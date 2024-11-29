@@ -20,8 +20,8 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
     const { pokemonId } = route.params;
 
     const pokeballImg = isDark
-        ? require('../../../assets/pokeball-light.png')
-        : require('../../../assets/pokeball-dark.png')
+        ? require('../../../assets/pokeball-dark.png')
+        : require('../../../assets/pokeball-light.png')
 
     const { isLoading, data: pokemon } = useQuery({
         queryKey: ['pokemon', pokemonId],
