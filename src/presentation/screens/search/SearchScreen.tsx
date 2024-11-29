@@ -31,7 +31,7 @@ export const SearchScreen = () => {
         if (term.length < 3) return [];
 
         return pokemonNameList.filter(pokemon =>
-            pokemon.name.includes(term.toLocaleUpperCase()))
+            pokemon.name.includes(term.toLocaleLowerCase()))
 
     }, [term])
 
